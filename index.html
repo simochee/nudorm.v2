@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>デジタル版 白鳥寮献立表</title>
+	<!-- Meta Tags -->
+	<meta name="theme-color" content="#ad1514">
+	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-class="{'bg-mode': bgMode}" ng-controller="appCtrl">
+
+	<div class="container">
+		
+		<header class="global-header">
+			<h1>デジタル版&ensp;白鳥寮献立表</h1>
+		</header>
+
+		<main>
+
+			<div ng-view></div>
+
+			<button class="btn" ng-click="scrollTop()">
+				<span class="ion-arrow-up-a icon"></span>
+				ページトップへ
+			</button>
+
+			<a href="https://www.ube-k.ac.jp/hakucho-domitory/" class="btn" target="_blank">
+				<span class="ion-home icon"></span>
+				宇部高専 白鳥寮
+			</a>
+		</main>
+
+		<footer class="global-footer">
+			<p>このサイトは非公認で勝手に運営しています</p>
+		</footer>
+
+		<button class="scroll-top scrollTop" id="scrollTop">
+			<span class="ion-ios-arrow-thin-up icon"></span>
+		</button>
+
+	</div>
+
+	<div class="popup-wrapper" ng-show="isOpen" ng-controller="menuDialogCtrl">
+		<div class="popup-menu">
+			<div class="date-area" ng-class="week">
+				{{date}}
+				<span class="week">{{week}}</span>
+			</div>
+			<div class="menu-area">
+				<ol class="menu-list">
+					<li class="list-item">
+						<div class="label">朝</div>
+						<div class="menu">
+							<span class="main" ng-if="bf.jap != ''">{{bf.jap}}</span>
+							<span class="main" ng-if="bf.wes != ''">{{bf.wes}}</span>
+							<span class="side" ng-repeat="side in bf.sides">{{side}}</span>
+						</div>
+					</li>
+					<li class="list-item">
+						<div class="label">昼</div>
+						<div class="menu">
+							<span class="main">{{lc.main}}</span>
+							<span class="side" ng-repeat="side in lc.sides">{{side}}</span>
+						</div>
+					</li>
+					<li class="list-item">
+						<div class="label">夜</div>
+						<div class="menu">
+							<span class="main">{{dn.a}}</span>
+							<span class="main">{{dn.b}}</span>
+							<span class="side" ng-repeat="side in dn.sides">{{side}}</span>
+						</div>
+					</li>
+				</ol>
+			</div>
+			<div class="close-area">
+				<button class="close-btn" ng-click="closeDialog()">閉じる</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.min.js"></script>
+	<script src="js/ngStorage.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+	
+</body>
+</html>

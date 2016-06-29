@@ -1,0 +1,83 @@
+<div class="next-menu" ng-controller="nextMenuCtrl">
+	<div class="time">{{time}}<span class="small">の献立</span></div>
+	<ol class="menu-list">
+		<li class="main" ng-if="(menu.jap != '' && menu.wes != '') && isBF">{{menu.jap}} / {{menu.wes}}</li>
+		<li class="main" ng-if="(menu.jap == '' || menu.wes == '')">{{menu.jap}}{{menu.wes}}</li>
+		<li class="main" ng-if="menu.main">{{menu.main}}</li>
+		<li class="main dinnerA" ng-if="menu.a">{{menu.a}}</li>
+		<li class="main dinnerB" ng-if="menu.b">{{menu.b}}</li>
+		<li class="side" ng-repeat="side in menu.sides">{{side}}</li>
+	</ol>
+</div>
+
+<button type="button" ng-click="jumpToday()" class="btn">
+	<span class="icon">
+		<span class="ion-fork"></span>
+		<span class="ion-knife"></span>
+	</span>
+	今日の献立
+</button>
+
+<button type="button" ng-click="openDialog('#search')" class="btn">
+	<span class="ion-ios-search-strong icon"></span>
+	検索
+</button>
+
+<ol class="menu-archives">
+	<li class="archives-item" ng-repeat="item in menuList" ng-init="[isToday = isToday($index), week = getWeek($index)]" ng-class="[isToday ? 'today' : 'open-popup', week]" ng-click="openMenu($index)" ng-if="$index > 0">
+		<div class="archive-date">
+			{{$index}}
+			<span class="week">{{week}}</span>
+		</div>
+		<ol class="archive-list" ng-if="!isToday">
+			<li class="list-item">
+				<div class="label">朝</div>
+				<div class="menu" ng-init="bf = item.breakfast">
+					<span ng-if="bf.jap != ''">{{bf.jap}}</span>
+					<span ng-if="bf.wes != ''">{{bf.wes}}</span>
+				</div>
+			</li>
+			<li class="list-item">
+				<div class="label">昼</div>
+				<div class="menu" ng-init="lc = item.lunch">
+					<span>{{lc.main}}</span>
+				</div>
+			</li>
+			<li class="list-item">
+				<div class="label">夜</div>
+				<div class="menu" ng-init="dn = item.dinner">
+					<span>{{dn.a}}</span>
+					<span>{{dn.b}}</span>
+				</div>
+			</li>
+		</ol>
+		<ol class="archive-list" ng-if="isToday">
+			<li class="list-item">
+				<div class="label">朝</div>
+				<div class="menu" ng-init="bf = item.breakfast">
+					<span class="main" ng-if="bf.jap != ''">{{bf.jap}}</span>
+					<span class="main" nf-if="bf.wes != ''">{{bf.wes}}</span>
+					<hr class="partition">
+					<span class="side" ng-repeat="side in bf.sides">{{side}}</span>
+				</div>
+			</li>
+			<li class="list-item">
+				<div class="label">昼</div>
+				<div class="menu" ng-init="lc = item.lunch">
+					<span class="main">{{lc.main}}</span>
+					<hr class="partition">
+					<span class="side" ng-repeat="side in lc.sides">{{side}}</span>
+				</div>
+			</li>
+			<li class="list-item">
+				<div class="label">夜</div>
+				<div class="menu" ng-init="dn = item.dinner">
+					<span class="main">{{dn.a}}</span>
+					<span class="main">{{dn.b}}</span>
+					<hr class="partition">
+					<span class="side" ng-repeat="side in dn.sides">{{side}}</span>
+				</div>
+			</li>
+		</ol>
+	</li>
+</ol>

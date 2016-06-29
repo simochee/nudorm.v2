@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Editor</title>
+	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="/css/style2.css">
+</head>
+<body>
+
+	<input type="hidden" name="created">
+
+	<div class="container">
+
+		<div class="header">
+			<div class="period">
+				<input type="text" class="year" placeholder="YYYY"><span>/</span><input type="text" class="month" placeholder="MM">
+				<input type="text" class="start" placeholder="DD"><span>〜</span><input type="text" class="end" placeholder="DD">
+			</div>
+			<div class="open-file">
+				<input type="file" id="openFile" accept=".json">
+				<label for="openFile" title="Edit an existing file">
+					<span class="ion-document"></span>
+				</label>
+			</div>
+			<div class="start-btn">
+				<button id="start" title="Begin editing">
+					<span class="ion-arrow-right-a"></span>
+				</button>
+				<button id="refresh" title="Reflesh Calendar">
+					<span class="ion-loop"></span>
+				</button>
+			</div>
+			<div class="save">
+				<button id="save"><span class="ion-archive"></span></button>
+			</div>
+		</div>
+
+		<div id="menus">
+			<div class="menu-card-plane" style="display: none;">
+				<div class="date">
+					<span class="day"></span>
+					<span class="week"></span>
+				</div>
+				<div class="menu-body breakfast">
+					<div class="main">
+						<input type="text" class="bf_jp" placeholder="Japanese">
+					</div>
+					<div class="main">
+						<input type="text" class="bf_ws" placeholder="Western">
+					</div>
+					<div class="side">
+						<textarea rows="5" class="bf_sides" placeholder="Side menus"></textarea>
+					</div>
+					<div class="values bf_jp">
+						<div class="values-item">
+							<input type="text" placeholder="kcal">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+					</div>
+					<div class="values bf_ws">
+						<div class="values-item">
+							<input type="text" placeholder="kcal">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+					</div>
+				</div>
+				<div class="menu-body lunch">
+					<div class="main">
+						<input type="text" class="lc_main" placeholder="Main menu">
+					</div>
+					<div class="side">
+						<textarea rows="5" class="lc_sides" placeholder="Side menus"></textarea>
+					</div>
+					<div class="values lc">
+						<div class="values-item">
+							<input type="text" placeholder="kcal">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+					</div>
+				</div>
+				<div class="menu-body dinner">
+					<div class="main">
+						<input type="text" class="dn_a" placeholder="Set A">
+					</div>
+					<div class="main">
+						<input type="text" class="dn_b" placeholder="Set B">
+					</div>
+					<div class="side">
+						<textarea rows="5" class="dn_sides" placeholder="Side menus"></textarea>
+					</div>
+					<div class="values dn_a">
+						<div class="values-item">
+							<input type="text" placeholder="kcal">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+					</div>
+					<div class="values dn_b">
+						<div class="values-item">
+							<input type="text" placeholder="kcal">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+						<div class="values-item">
+							<input type="text" placeholder="g">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="output">
+		<button id="close">
+			<span class="ion-close-round"></span>
+		</button>
+		<div class="result">
+			<textarea id="result"></textarea>
+		</div>
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<script src="/editor/script2.js"></script>
+</body>
+</html>
