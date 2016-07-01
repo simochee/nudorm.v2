@@ -48,7 +48,34 @@ app.controller('appCtrl', function($scope) {
 	});
 	$scope.$on('event:closeDialog', function(event, args) {
 		$scope.bgMode = false;
+	});
+	$scope.$on('event:openTimetable', function(event) {
+		$scope.$broadcast('event:openTimetableSend', []);
+		$scope.bgMode = true;
 	})
+	$scope.scrollTop = function() {
+		$('#scrollTop').addClass('hide');
+		$('body,html').animate({
+			scrollTop: 0
+		}, {
+			duration: 400,
+			easing: 'swing',
+			complete: function() {
+				$('#scrollTop').removeClass('hide');
+			}
+		});
+	}
+	$(window).on('scroll', function() {
+		var $ele = $('#scrollTop');
+		var winH = $(window).height();
+		var eleH = $('.container').height();
+		var scrT = $(window).scrollTop();
+		if(scrT < 150 || scrT > eleH - (winH + 170) || $ele.hasClass('hide')) {
+			$ele.fadeOut();
+		} else {
+			$ele.fadeIn();
+		}
+	});
 });
 
 app.controller('indexCtrl', ['$scope', '$timeout', '$http', '$localStorage', 'utils', function($scope, $timeout, $http, $localStorage, utils) {
@@ -57,7 +84,11 @@ app.controller('indexCtrl', ['$scope', '$timeout', '$http', '$localStorage', 'ut
 		listUpdate: null
 	});
 	const now = utils.now();
-	if($scope.$storage.menuList == null || now.u - $scope.$storage.listUpdate > 604800) {
+	const menuDate = $scope.$storage.menuList[0];
+	console.log(`${menuDate.year}-${utils.zero(menuDate.month)}` != `${now.y}-${utils.zero(now.m)}`);
+	if($scope.$storage.menuList == null
+		|| now.u - $scope.$storage.listUpdate > 604800
+		|| `${menuDate.year}-${utils.zero(menuDate.month)}` != `${now.y}-${utils.zero(now.m)}`) {
 		$timeout(function() {
 			$http.get(`menu/${now.y}${utils.zero(now.m)}.json`)
 			.success(function(data) {
@@ -84,6 +115,9 @@ app.controller('indexCtrl', ['$scope', '$timeout', '$http', '$localStorage', 'ut
 				menu: menuList[$idx]
 			});
 		}
+	}
+	$scope.openTimetable = function() {
+		$scope.$emit('event:openTimetable', []);
 	}
 	$scope.jumpToday = function() {
 		const pos = $('.today').offset().top - 30;
@@ -122,7 +156,6 @@ app.controller('nextMenuCtrl', ['$scope', '$timeout', '$http', 'utils', function
 		}
 		$scope.time = '明日 朝';
 		$scope.menu = $scope.menuList.breakfast;
-		$scope.isBF = true;
 	} else if(nowTime > 1250) {
 		$scope.time = '夜';
 		$scope.menu = $scope.$storage.menuList[now.d].dinner;
@@ -144,6 +177,17 @@ app.controller('menuDialogCtrl', ['$scope', 'utils', function($scope, utils) {
 		$scope.bf = menu.breakfast;
 		$scope.lc = menu.lunch;
 		$scope.dn = menu.dinner;
+	});
+	$scope.closeDialog = function() {
+		$scope.isOpen = false;
+		$scope.$emit('event:closeDialog', []);
+	}
+}]);
+
+app.controller('timeTableCtrl', ['$scope', 'utils', function($scope, utils) {
+	$scope.$on('event:openTimetableSend', function(event) {
+		console.log('happen')
+		$scope.isOpen = true;
 	});
 	$scope.closeDialog = function() {
 		$scope.isOpen = false;

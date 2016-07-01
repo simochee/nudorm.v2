@@ -114,7 +114,7 @@ body {
 	}
 }
 
-.popup-menu {
+.popup-dialog {
 	position: fixed;
 	top: 30px;
 	left: 15px;
@@ -125,91 +125,17 @@ body {
 	box-sizing: border-box;
 	border: 5px solid #797979;
 	background: rgba(#fff, 0.85);
-	.date-area {
+	.header-area {
 		margin: 10px 0 5px;
 		text-align: center;
 		font-weight: bold;
 		font-size: 25px;
 		color: #252521;
-		&.sun {
-			color: #f07077;
-		}
-		&.sat {
-			color: #727bf2;
-		}
-		.week {
-			display: inline-block;
-			font-weight: normal;
-			margin-left: 8px;
-			font-size: 14px;
-			text-transform: uppercase;
-		}
 	}
-	.menu-area {
+	.main-area {
 		@include flex(1);
 		overflow-y: auto;
 		padding: 10px 25px;
-		.menu-list {
-			.list-item {
-				margin-bottom: 30px;
-				&:last-child {
-					margin-bottom: 10px;
-				}
-				.label {
-					max-width: 200px;
-					height: 20px;
-					margin: 0 auto;
-					border-radius: 8px;
-					background: #d5d5d5;
-					line-height: 20px;
-					font-size: 14px;
-					text-align: center;
-				}
-				.menu {
-					@include display-flex;
-					@include flex-direction(column);
-					@include align-items(center);
-					margin: 10px 0;
-					.main {
-						margin: 10px 0;
-						font-size: 22px;
-					}
-					.side {
-						margin: 8px 0;
-						font-size: 15px;
-						color: #333;
-					}
-					&.dinner {
-						.main {
-							margin-left: 26px;
-							// text-indent: -26px;
-							&::before, &::after {
-								display: inline-block;
-								width: 22px;
-								height: 22px;
-								margin: 1px 6px 1px -26px;
-								background: #333;
-								font-size: 15px;
-								line-height: 22px;
-								text-align: center;
-								color: #fff;
-							}
-							&:nth-child(1) {
-								margin-bottom: 5px;
-								&::before {
-									content: "A";
-								}
-							}
-							&:nth-child(2) {
-								&::before {
-									content: "B";
-								}
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 	.close-area {
 		width: 100%;
@@ -230,6 +156,86 @@ body {
 				background: #454545;
 				border-color: #454545;
 				color: #e0e0e0;
+			}
+		}
+	}
+	&.menu {
+		.header-area {
+			&.sun {
+				color: #f07077;
+			}
+			&.sat {
+				color: #727bf2;
+			}
+			.week {
+				display: inline-block;
+				font-weight: normal;
+				margin-left: 8px;
+				font-size: 14px;
+				text-transform: uppercase;
+			}
+		}
+		.main-area {
+			.menu-list {
+				.list-item {
+					margin-bottom: 30px;
+					&:last-child {
+						margin-bottom: 10px;
+					}
+					.label {
+						max-width: 200px;
+						height: 20px;
+						margin: 0 auto;
+						border-radius: 8px;
+						background: #d5d5d5;
+						line-height: 20px;
+						font-size: 14px;
+						text-align: center;
+					}
+					.menu {
+						@include display-flex;
+						@include flex-direction(column);
+						@include align-items(center);
+						margin: 10px 0;
+						.main {
+							margin: 10px 0;
+							font-size: 22px;
+						}
+						.side {
+							margin: 8px 0;
+							font-size: 15px;
+							color: #333;
+						}
+						&.dinner {
+							.main {
+								margin-left: 26px;
+								// text-indent: -26px;
+								&::before, &::after {
+									display: inline-block;
+									width: 22px;
+									height: 22px;
+									margin: 1px 6px 1px -26px;
+									background: #333;
+									font-size: 15px;
+									line-height: 22px;
+									text-align: center;
+									color: #fff;
+								}
+								&:nth-child(1) {
+									margin-bottom: 5px;
+									&::before {
+										content: "A";
+									}
+								}
+								&:nth-child(2) {
+									&::before {
+										content: "B";
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 <div class="next-menu" ng-controller="nextMenuCtrl">
 	<div class="time">{{time}}<span class="small">の献立</span></div>
 	<ol class="menu-list">
-		<li class="main" ng-if="(menu.jap != '' && menu.wes != '') && isBF">{{menu.jap}} / {{menu.wes}}</li>
+		<li class="main" ng-if="(menu.jap != '' && menu.wes != '')">{{menu.jap}} / {{menu.wes}}</li>
 		<li class="main" ng-if="(menu.jap == '' || menu.wes == '')">{{menu.jap}}{{menu.wes}}</li>
 		<li class="main" ng-if="menu.main">{{menu.main}}</li>
 		<li class="main dinnerA" ng-if="menu.a">{{menu.a}}</li>
@@ -18,9 +18,14 @@
 	今日の献立
 </button>
 
-<button type="button" ng-click="openDialog('#search')" class="btn">
+<!-- <button type="button" ng-click="openDialog('#search')" class="btn">
 	<span class="ion-ios-search-strong icon"></span>
 	検索
+</button> -->
+
+<button type="button" ng-click="openTimetable()" class="btn">
+	<span class="ion-calendar icon"></span>
+	時間割
 </button>
 
 <ol class="menu-archives">

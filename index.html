@@ -35,19 +35,19 @@
 			<p>このサイトは非公認で勝手に運営しています</p>
 		</footer>
 
-		<button class="scroll-top scrollTop" id="scrollTop">
+		<button class="scroll-top scrollTop" id="scrollTop" ng-click="scrollTop()">
 			<span class="ion-ios-arrow-thin-up icon"></span>
 		</button>
 
 	</div>
 
 	<div class="popup-wrapper" ng-show="isOpen" ng-controller="menuDialogCtrl">
-		<div class="popup-menu">
-			<div class="date-area" ng-class="week">
+		<div class="popup-dialog menu">
+			<div class="header-area" ng-class="week">
 				{{date}}
 				<span class="week">{{week}}</span>
 			</div>
-			<div class="menu-area">
+			<div class="main-area">
 				<ol class="menu-list">
 					<li class="list-item">
 						<div class="label">朝</div>
@@ -73,6 +73,20 @@
 						</div>
 					</li>
 				</ol>
+			</div>
+			<div class="close-area">
+				<button class="close-btn" ng-click="closeDialog()">閉じる</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="popup-wrapper popup" ng-show="isOpen" ng-controller="timeTableCtrl">
+		<div class="popup-dialog">
+			<div class="header-area">
+				
+			</div>
+			<div class="main-area">
+				
 			</div>
 			<div class="close-area">
 				<button class="close-btn" ng-click="closeDialog()">閉じる</button>
